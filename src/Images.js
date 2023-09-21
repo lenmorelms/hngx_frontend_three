@@ -1,0 +1,16 @@
+export const Bird1 = require("./assets/azmaan-baluch.jpg");
+export const Bird2 = require("./assets/damon-hall.jpg");
+export const Fish1 = require("./assets/daniel-leonforte.jpg");
+export const Reptile1 = require("./assets/david-clode.jpg");
+export const Amphibian1 = require("./assets/david-clode-amp.jpg");
+export const Fish2 = require("./assets/david-clode-fish.jpg");
+export const Reptile2 = require("./assets/david-clode-reptile.jpg");
+export const Reptile3 = require("./assets/gaetano-cessati.jpg");
+export const Bird3 = require("./assets/jeremy-hynes.jpg");
+export const Mammal1 = require("./assets/matias-tapia.jpg");
+export const Mammal2 = require("./assets/nick-fewings.jpg");
+export const Mammal3 = require("./assets/ray-hennessy.jpg");
+export const Amphibian2 = require("./assets/wallace-heng.jpg");
+export const Fish3 = require("./assets/wang-john.jpg");
+export const Amphibian3 = require("./assets/zeteny-lisztes.jpg");
+export const Logo = require("./assets/logo.jpg");
