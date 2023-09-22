@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 import _ from "lodash";
 import { auth } from "./firebase";
 
 import { useDrag, useDrop } from "react-dnd";
 
+import Header from "./Header";
+import Footer from "./Footer";
 import DataImages from "./DataImages";
 
 const ImageCard = ({ src, title, id, tags, index, moveImage }) => {
@@ -63,6 +66,7 @@ const ImageCard = ({ src, title, id, tags, index, moveImage }) => {
   return (
     <div ref={ref} style={{ opacity }} className="card">
       <img src={src} alt={title} />
+      <span>{tags}</span>
     </div>
   );
 };
@@ -71,6 +75,15 @@ const Home = () => {
   const [ authUser, setAuthUser ] = useState(null);
   const [images, setImages] = React.useState(DataImages);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+  const loggedIn = sessionStorage.getItem("loggedIn");
+  if(loggedIn === null) { loggedIn = false }
+
+  useEffect(() => {
+    setIsLoading(true);
+    setImages(DataImages);
+    setIsLoading(false);
+  }, [])
 
   useEffect(() => {
     const listen = onAuthStateChanged(auth, (user) => {
@@ -86,7 +99,6 @@ const Home = () => {
   }, [])
 
   const moveImage = React.useCallback((dragIndex, hoverIndex) => {
-    setIsLoading(true);
     setImages((prevCards) => {
       const clonedCards = [...prevCards];
       const removedItem = clonedCards.splice(dragIndex, 1)[0];
@@ -94,34 +106,33 @@ const Home = () => {
       clonedCards.splice(hoverIndex, 0, removedItem);
       return clonedCards;
     });
-    setIsLoading(false);
   }, []);
 
   return (
-    <main>
-      { authUser && 
+    <>
+    {authUser && 
       <>
+      <Header />
       <main>
         {
-          isLoading ? (
-            "Loading..."
-          ) : 
-          (React.Children.toArray(
+         React.Children.toArray(
             images.map((image, index) => (
               <ImageCard
                 src={image.src}
+                tags={image.tags}
                 title={image.title}
                 id={image.id}
                 index={index}
                 moveImage={moveImage}
               />
             ))
-          ))
+          )
         }
     </main>
+    <Footer />
+    </>
+   }
       </>
-      }
-    </main>
   );
 };
 

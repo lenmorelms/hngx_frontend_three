@@ -50,6 +50,7 @@ body {
   background-image: linear-gradient(to bottom right, navy, red);
 }
 
+
 .navbar a {
   float: left;
   display: block;
@@ -160,7 +161,7 @@ main {
   box-sizing: border-box;
 }
 
-.submit {
+.submit, .signinbtn{
   width: 100%;
   background-color: red; /* For browsers that do not support gradients */
   background-image: linear-gradient(to bottom right, navy, red);

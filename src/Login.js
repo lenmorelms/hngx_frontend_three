@@ -14,6 +14,7 @@ import { auth } from "./firebase";
             signInWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value)
             .then((userCredential) => {
                 // setLoading(true);
+                sessionStorage.setItem("loggedIn", true);
                 console.log(userCredential);
                 navigate("/");
             })
@@ -27,7 +28,7 @@ import { auth } from "./firebase";
         <Card style={{ minWidth: "400px" }}>
             <Card.Body>
                 <h2 className="text-center mb-4">Sign In</h2>
-                {error && <Alert variant="danger">{error}</Alert>}
+                {error && <Alert variant="danger" style={{ color: "red"}}>{error}</Alert>}
                 <Form>
                     <Form.Group id="email">
                         <Form.Label>Email</Form.Label>

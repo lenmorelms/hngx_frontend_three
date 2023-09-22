@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Signout = () => {
   const navigate = useNavigate();
   signOut(auth).then(() => {
+    sessionStorage.setItem("loggedIn", false);
     navigate("/signin");
   }).catch((error)=> {
     navigate("/");
