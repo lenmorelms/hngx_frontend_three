@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import _ from "lodash";
 import { auth } from "./firebase";
 
 import { useDrag, useDrop } from "react-dnd";
@@ -9,6 +8,8 @@ import { useDrag, useDrop } from "react-dnd";
 import Header from "./Header";
 import Footer from "./Footer";
 import DataImages from "./DataImages";
+
+import LoadingSpinner from "./LoadingSpinner";
 
 const ImageCard = ({ src, title, id, tags, index, moveImage }) => {
   const ref = React.useRef(null);
@@ -76,13 +77,15 @@ const Home = () => {
   const [images, setImages] = React.useState(DataImages);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const loggedIn = sessionStorage.getItem("loggedIn");
+  let loggedIn = sessionStorage.getItem("loggedIn");
   if(loggedIn === null) { loggedIn = false }
 
   useEffect(() => {
     setIsLoading(true);
-    setImages(DataImages);
-    setIsLoading(false);
+    setTimeout(function() {
+      setImages(DataImages);
+      setIsLoading(false);
+  }, 2000);
   }, [])
 
   useEffect(() => {
@@ -107,6 +110,21 @@ const Home = () => {
       return clonedCards;
     });
   }, []);
+  
+  const renderImages = (
+    React.Children.toArray(
+       images.map((image, index) => (
+         <ImageCard
+           src={image.src}
+           tags={image.tags}
+           title={image.title}
+           id={image.id}
+           index={index}
+           moveImage={moveImage}
+         />
+       ))
+    )
+  );
 
   return (
     <>
@@ -114,7 +132,8 @@ const Home = () => {
       <>
       <Header />
       <main>
-        {
+        { isLoading ? <LoadingSpinner /> : renderImages }
+        {/* {
          React.Children.toArray(
             images.map((image, index) => (
               <ImageCard
@@ -127,7 +146,7 @@ const Home = () => {
               />
             ))
           )
-        }
+        } */}
     </main>
     <Footer />
     </>

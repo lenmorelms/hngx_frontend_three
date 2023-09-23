@@ -71,25 +71,25 @@ const DataImages = [
         title: "Animal",
         tags: "Reptile",
         src: Reptile3
-    },
-    {
-        id: 13,
-        title: "Animal",
-        tags: "Fish",
-        src: Fish3
-    },
-    {
-        id: 14,
-        title: "Animal",
-        tags: "Amphibian",
-        src: Amphibian3
-    },
-    {
-        id: 15,
-        title: "Animal",
-        tags: "Bird",
-        src: Bird3
     }
+    // {
+    //     id: 13,
+    //     title: "Animal",
+    //     tags: "Fish",
+    //     src: Fish3
+    // },
+    // {
+    //     id: 14,
+    //     title: "Animal",
+    //     tags: "Amphibian",
+    //     src: Amphibian3
+    // },
+    // {
+    //     id: 15,
+    //     title: "Animal",
+    //     tags: "Bird",
+    //     src: Bird3
+    // }
 ];
 
 export default DataImages;
